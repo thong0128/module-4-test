@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thành phố</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Danh sách thành phố</h1>
+<p>
+    <a th:href="@{/cities/create}">
+        <button>Thêm thành phố</button></a>
+</p>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Thành phố</th>
+        <th>Quốc gia</th>
+        <th></th>
+    </tr>
+    <tr th:each="c, cStatus : ${cities}">
+        <td th:text="${cStatus.count}"></td>
+        <td><a th:href="@{/cities/{id}(id=${c.getId()})}" th:text="${c.getName()}"></a></td>
+        <td th:text="${c.getCountry()==null}?'no country':${c.getCountry().getName()}"></td>
+        <td>
+            <a th:href="@{/cities/update/{id}(id=${c.getId()})}">Chỉnh sửa</a> | <a th:href="@{/cities/delete/{id}(id=${c.getId()})}">Xóa</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
